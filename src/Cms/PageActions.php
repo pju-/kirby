@@ -587,5 +587,4 @@ trait PageActions
 
         return $page;
     }
-
 }

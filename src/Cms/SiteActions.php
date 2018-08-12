@@ -118,5 +118,4 @@ trait SiteActions
 
         return parent::save($languageCode);
     }
-
 }

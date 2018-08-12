@@ -222,5 +222,4 @@ abstract class ModelWithContent extends Model
             return $model->clone(['content' => $strings])->save($language);
         });
     }
-
 }
