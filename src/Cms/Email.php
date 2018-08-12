@@ -74,7 +74,7 @@ class Email
             $html = App::instance()->emailTemplate($this->props['template'], 'html');
             $text = App::instance()->emailTemplate($this->props['template'], 'text');
 
-            if ($html->exists()) {
+            if ($html->exists() && $text->exists()) {
                 $this->props['body'] = [
                     'html' => $html->render($data),
                     'text' => $text->render($data),

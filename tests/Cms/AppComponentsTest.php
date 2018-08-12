@@ -50,7 +50,7 @@ class AppComponentsTest extends TestCase
     public function testEmailTemplate()
     {
         $app      = new App();
-        $template = $app->template('default');
+        $template = $app->emailTemplate('default');
 
         $this->assertInstanceOf(EmailTemplate::class, $template);
     }
