@@ -263,6 +263,29 @@ class AppPluginsTest extends TestCase
         $this->assertEquals($file, $kirby->extension('templates', 'project'));
     }
 
+    public function testEmail()
+    {
+        $kirby = new App([
+            'emails' => [
+                'contact' => $file = 'contact.php'
+            ]
+        ]);
+
+        $this->assertEquals($file, $kirby->extension('emails', 'contact'));
+    }
+
+    public function testEmailInPlugin()
+    {
+        App::plugin('test/test', [
+            'emails' => [
+                'contact' => $file = 'contact.php'
+            ]
+        ]);
+
+        $kirby = new App();
+        $this->assertEquals($file, $kirby->extension('emails', 'contact'));
+    }
+
     public function testTranslation()
     {
 

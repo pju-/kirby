@@ -2,16 +2,20 @@
 
 use Kirby\Cms\App;
 use Kirby\Cms\Model;
+use Kirby\Data\Data;
+use Kirby\Toolkit\F;
 use Kirby\Cms\Filename;
 use Kirby\Cms\Response;
 use Kirby\Cms\Template;
-use Kirby\Data\Data;
 use Kirby\Image\Darkroom;
 use Kirby\Text\SmartyPants;
-use Kirby\Toolkit\F;
+use Kirby\Cms\EmailTemplate;
 use Kirby\Toolkit\Tpl as Snippet;
 
 return [
+    'emails' => function (App $kirby, string $name, string $type = 'text') {
+        return new EmailTemplate($name, $type);
+    },
     'file::url' => function (App $kirby, Model $file, array $options = []) {
 
         if (empty($options) === true) {

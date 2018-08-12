@@ -47,4 +47,12 @@ class AppComponentsTest extends TestCase
         $this->assertInstanceOf(Template::class, $template);
     }
 
+    public function testEmailTemplate()
+    {
+        $app      = new App();
+        $template = $app->template('default');
+
+        $this->assertInstanceOf(EmailTemplate::class, $template);
+    }
+
 }

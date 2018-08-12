@@ -3,7 +3,6 @@
 namespace Kirby\Cms;
 
 use Kirby\Exception\NotFoundException;
-use Kirby\Toolkit\Tpl;
 
 /**
  * Wrapper around our PHPMailer package, which
@@ -72,37 +71,24 @@ class Email
             $data = $this->props['data'] ?? [];
 
             // check if html/text templates exist
-            $html = $this->templateFile($this->props['template'], 'html');
-            $text = $this->templateFile($this->props['template'], 'text');
+            $html = App::instance()->emailTemplate($this->props['template'], 'html');
+            $text = App::instance()->emailTemplate($this->props['template'], 'text');
 
-            if (file_exists($html) === true && file_exists($text)) {
+            if ($html->exists()) {
                 $this->props['body'] = [
-                    'html' => Tpl::load($html, $data),
-                    'text' => Tpl::load($text, $data)
+                    'html' => $html->render($data),
+                    'text' => $text->render($data),
                 ];
 
             // fallback to single email text template
             } else {
-                $template = $this->templateFile($this->props['template']);
-
-                if (file_exists($template) === false) {
+                if (!$text->exists()) {
                     throw new NotFoundException('The email template "' . $this->props['template'] . '" cannot be found');
                 }
 
-                $this->props['body'] = Tpl::load($template, $data);
+                $this->props['body'] = $text->render($data);
             }
         }
-    }
-
-    protected function templateFile(string $name, string $type = null): string
-    {
-        $name = basename($this->props['template']);
-
-        if ($type !== null) {
-            $name .= '.' . $type;
-        }
-
-        return App::instance()->root('emails') . '/' . $name . '.php';
     }
 
     public function toArray(): array

@@ -20,6 +20,7 @@ trait AppPlugins
         'collections' => [],
         'components' => [],
         'controllers' => [],
+        'emails' => [],
         'fieldMethods' => [],
         'fileMethods' => [],
         'filesMethods' => [],
@@ -69,6 +70,11 @@ trait AppPlugins
     protected function extendControllers(array $controllers): array
     {
         return $this->extensions['controllers'] = array_merge($this->extensions['controllers'], $controllers);
+    }
+
+    protected function extendEmails(array $emails): array
+    {
+        return $this->extensions['emails'] = array_merge($this->extensions['emails'], $emails);
     }
 
     protected function extendFileMethods(array $methods): array

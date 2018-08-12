@@ -847,6 +847,14 @@ class App
     }
 
     /**
+     * @return EmailTemplate
+     */
+    public function emailTemplate(string $name, string $type = 'text'): EmailTemplate
+    {
+        return $this->extensions['components']['emails']($this, $name, $type);
+    }
+
+    /**
      * Thumbnail creator
      *
      * @param string $src
