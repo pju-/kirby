@@ -56,6 +56,7 @@ class Template
                 //
             }
 
+            // Look for the default template provided by an extension.
             $path = App::instance()->extension($this->store(), $this->name());
 
             if (!is_null($path)) {
@@ -69,7 +70,8 @@ class Template
             // Try the template with type extension in the default template directory.
             return F::realpath("{$this->root()}/{$name}.{$this->extension()}", $this->root());
         } catch (Exception $e) {
-            // Finally look for the template with type extension provided by an extension.
+            // Look for the template with type extension provided by an extension.
+            // This might be null if the template does not exist.
             return App::instance()->extension($this->store(), $name);
         }
     }
